@@ -15,6 +15,11 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
+{ nixpkgs
+, emacs
+, supportedSystems ? [ "x86_64-linux" ]
+}:
+
 let
   meta = {
     description = "GNU Emacs, the extensible, customizable text editor";
@@ -42,9 +47,6 @@ let
     maintainers = [ "emacs-buildstatus@gnu.org" ];
   };
 
-  nixpkgs = <nixpkgs>;
-  emacs = <emacs>;
-
   # Return the list of dependencies.
   buildInputsFrom = pkgs: with pkgs;
     [ texinfo ncurses pkgconfig x11 ]
@@ -65,7 +67,7 @@ in
     inherit nixpkgs meta;
     useLatestGnulib = false;
 
-    systems = [ "x86_64-linux" "x86_64-darwin" "i686-linux"];
+    systems = supportedSystems;
 
     customEnv = rec {
 
