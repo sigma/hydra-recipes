@@ -90,7 +90,7 @@ in
         configurePhase = ":";
 	distPhase = ''
 	  make info all
-	  ./make-dist --tar --tests --no-update
+	  ./make-dist --tar --tests --no-update || ./make-dist --tar --no-update
 	  mkdir -p $out/tarballs
 	  cp -pvd *.tar.gz $out/tarballs
 	'';
